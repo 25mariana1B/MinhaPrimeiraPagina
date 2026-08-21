@@ -4,405 +4,1993 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog de Perícia</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>Enciclopédia Mundial da Perícia</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef1f5;
+            color: #222;
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        header {
+            background:
+                linear-gradient(rgba(8, 20, 35, 0.88), rgba(8, 20, 35, 0.88)),
+                url("imagem-investigacao.jpg") center/cover;
+
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            max-width: 850px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        .introducao {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .introducao h2 {
+            color: #173b63;
+            margin-bottom: 12px;
+        }
+
+        .controles {
+            max-width: 1100px;
+            margin: 25px auto;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        .controles input,
+        .controles select {
+            flex: 1;
+            min-width: 220px;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 15px 50px;
+        }
+
+        #contador {
+            margin: 20px 0;
+            font-weight: bold;
+            color: #173b63;
+        }
+
+        .pericia {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .pericia img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .conteudo {
+            padding: 28px;
+        }
+
+        .conteudo h2 {
+            color: #173b63;
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .categoria {
+            display: inline-block;
+            background: #173b63;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .autor {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            background: #f4f7fa;
+            border-left: 4px solid #173b63;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .info strong {
+            color: #173b63;
+        }
+
+        .conteudo h3 {
+            color: #173b63;
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+
+        .conteudo ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .curiosidade {
+            background: #fff7d6;
+            border-left: 5px solid #e2b600;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .historico {
+            background: #edf6ff;
+            border-left: 5px solid #2674b8;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .botoes {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .botoes button {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            background: #edf0f3;
+            transition: 0.2s;
+        }
+
+        .botoes button:hover {
+            transform: scale(1.05);
+            background: #dce4ec;
+        }
+
+        .sem-resultados {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-tema {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: #173b63;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #081423;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* MODO ESCURO */
+
+        body.escuro {
+            background: #101820;
+            color: #eee;
+        }
+
+        body.escuro .introducao,
+        body.escuro .pericia,
+        body.escuro .sem-resultados {
+            background: #18232e;
+            color: #eee;
+        }
+
+        body.escuro .info {
+            background: #202e3b;
+        }
+
+        body.escuro .historico {
+            background: #162d40;
+        }
+
+        body.escuro .curiosidade {
+            background: #3b341b;
+        }
+
+        body.escuro .controles input,
+        body.escuro .controles select {
+            background: #202b35;
+            color: white;
+            border-color: #465766;
+        }
+
+        body.escuro .conteudo h2,
+        body.escuro .conteudo h3,
+        body.escuro #contador {
+            color: #72b7ff;
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            .conteudo h2 {
+                font-size: 24px;
+            }
+
+            .pericia img {
+                height: 210px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Meu Blog de Perícia</h1>
-        <p>Conheça diferentes áreas da perícia e a importância do trabalho pericial.</p>
-    </header>
+<header>
 
-    <main>
+    <h1>🔎 Enciclopédia Mundial da Perícia</h1>
 
-        <!-- PERÍCIA CRIMINAL -->
+    <p>
+        Conheça as principais áreas das ciências forenses, o que cada uma faz,
+        sua história, seus pioneiros, formação profissional, importância
+        e aplicações no passado e no mundo atual.
+    </p>
 
-        <article>
-            <img src="imagem-pericia-criminal.jpg"
-                alt="Perito criminal analisando uma cena de crime.">
+</header>
 
-            <div>
-                <h2>Perícia Criminal</h2>
 
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
+<section class="introducao">
+
+    <h2>O que é perícia?</h2>
+
+    <p>
+        A perícia é o uso de conhecimentos técnicos, científicos ou especializados
+        para analisar fatos, vestígios, materiais, documentos, pessoas ou situações
+        que precisam ser esclarecidos.
+    </p>
+
+    <p>
+        A ciência forense reúne várias áreas diferentes. Não existe uma única
+        profissão chamada simplesmente "perito universal". Um profissional pode
+        trabalhar com genética, química, informática, medicina, documentos,
+        impressões digitais, engenharia, contabilidade e muitas outras áreas.
+    </p>
+
+    <p>
+        Este site reúne as principais áreas das ciências forenses e apresenta
+        referências históricas importantes. Algumas disciplinas possuem séculos
+        de desenvolvimento e outras surgiram ou se consolidaram recentemente.
+    </p>
+
+</section>
+
+
+<div class="controles">
+
+    <input
+        type="text"
+        id="pesquisa"
+        placeholder="🔎 Pesquise uma perícia..."
+    >
+
+    <select id="filtroCategoria">
+
+        <option value="todas">
+            Todas as áreas
+        </option>
+
+        <option value="criminal">
+            Ciências criminais
+        </option>
+
+        <option value="biologica">
+            Biológicas e médicas
+        </option>
+
+        <option value="quimica">
+            Química e materiais
+        </option>
+
+        <option value="tecnologia">
+            Tecnologia
+        </option>
+
+        <option value="documental">
+            Documentos e identificação
+        </option>
+
+        <option value="especializada">
+            Outras áreas
+        </option>
+
+    </select>
+
+</div>
+
+
+<main>
+
+    <div id="contador"></div>
+
+    <section id="listaPericias"></section>
+
+</main>
+
+
+<button
+    class="btn-tema"
+    onclick="alternarTema()"
+    title="Alternar tema"
+>
+    🌓
+</button>
+
+
+<footer>
+
+    <p><strong>Enciclopédia Mundial da Perícia</strong></p>
+
+    <p>
+        Projeto educacional desenvolvido por Gisele Fidelis.
+    </p>
+
+    <p>
+        As informações históricas e profissionais podem variar conforme o país,
+        legislação e instituição de ensino.
+    </p>
+
+</footer>
+
+
+<script>
+
+const pericias = [
+
+/* =========================================================
+   1 - CIÊNCIA FORENSE / CRIMINALÍSTICA
+========================================================= */
+
+{
+    nome: "Criminalística",
+    categoria: "criminal",
+
+    imagem: "imagem-pericia-criminal.jpg",
+
+    descricao:
+        "A criminalística examina vestígios relacionados a fatos de interesse investigativo, utilizando métodos científicos para ajudar a reconstruir acontecimentos.",
+
+    faz:
+        "Analisa locais, objetos e vestígios. Pode envolver impressões digitais, manchas, fibras, marcas, documentos, materiais, instrumentos e outros elementos.",
+
+    pioneiro:
+        "Hans Gross (1847–1915) é uma das principais referências históricas da criminalística. Ele defendia a aplicação sistemática de conhecimentos científicos à investigação criminal.",
+
+    nascimento:
+        "Hans Gross nasceu em 1847.",
+
+    morte:
+        "Morreu em 1915.",
+
+    ano:
+        "Final do século XIX / início do século XX",
+
+    importancia:
+        "Sua importância está na consolidação da ideia de que uma investigação criminal deveria utilizar observação, documentação e conhecimentos científicos, em vez de depender somente de confissões ou testemunhos.",
+
+    estudos:
+        "Normalmente envolve graduação compatível com a área do cargo, além de conhecimentos de química, biologia, física, estatística, criminalística, legislação, cadeia de custódia e análise de vestígios.",
+
+    tempo:
+        "Em muitos caminhos profissionais são necessários cerca de 4 a 5 anos de graduação, podendo haver especialização e treinamento adicional.",
+
+    hoje:
+        "Atualmente ajuda investigações criminais, identificação de vestígios, reconstrução de acontecimentos e produção de laudos.",
+
+    antigamente:
+        "Historicamente ajudou a transformar a investigação baseada principalmente em testemunhos em uma investigação que também utiliza evidências materiais.",
+
+    referencia:
+        "Edmond Locard, Hans Gross e Alphonse Bertillon são nomes fundamentais para compreender o desenvolvimento histórico da ciência forense.",
+
+    curiosidade:
+        "Edmond Locard ficou conhecido pelo princípio de que o contato entre pessoas e ambientes pode produzir transferência de vestígios."
+},
+
+
+/* =========================================================
+   2 - MEDICINA LEGAL
+========================================================= */
+
+{
+    nome: "Medicina Legal",
+    categoria: "biologica",
+
+    imagem: "imagem-pericia-medica.jpg",
+
+    descricao:
+        "A medicina legal aplica conhecimentos médicos às questões relacionadas à Justiça.",
+
+    faz:
+        "Pode estudar lesões, causas e mecanismos de morte, identificação humana, violência, intoxicações e outras questões médico-legais.",
+
+    pioneiro:
+        "Mathieu Orfila (1787–1853) foi uma das grandes figuras da medicina legal e da toxicologia moderna.",
+
+    nascimento:
+        "Mathieu Orfila nasceu em 1787.",
+
+    morte:
+        "Morreu em 1853.",
+
+    ano:
+        "Séculos XVIII–XIX",
+
+    importancia:
+        "A medicina legal tornou possível aplicar conhecimentos médicos de forma sistemática a investigações e processos judiciais.",
+
+    estudos:
+        "Medicina, anatomia, fisiologia, patologia, traumatologia, toxicologia, legislação médica e conhecimentos específicos de medicina legal.",
+
+    tempo:
+        "A formação médica geralmente exige aproximadamente 6 anos no Brasil, seguida de residência, especialização ou formação específica conforme a carreira.",
+
+    hoje:
+        "É utilizada em investigações de mortes, acidentes, agressões, identificação humana e diversas questões judiciais.",
+
+    antigamente:
+        "A medicina começou a ser utilizada de forma crescente para esclarecer mortes e lesões que antes eram difíceis de interpretar cientificamente.",
+
+    referencia:
+        "Mathieu Orfila é uma das principais referências históricas.",
+
+    curiosidade:
+        "Orfila publicou trabalhos que ajudaram a transformar a análise de substâncias tóxicas em uma área científica aplicada à Justiça."
+},
+
+
+/* =========================================================
+   3 - TOXICOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Toxicologia Forense",
+    categoria: "quimica",
+
+    imagem: "imagem-pericia-quimica.jpg",
+
+    descricao:
+        "Investiga a presença, natureza e efeitos de substâncias químicas em situações relacionadas à Justiça.",
+
+    faz:
+        "Pode analisar medicamentos, drogas, venenos, álcool e outras substâncias em amostras biológicas e materiais.",
+
+    pioneiro:
+        "Mathieu Orfila é tradicionalmente considerado o pai da toxicologia moderna.",
+
+    nascimento:
+        "1787",
+
+    morte:
+        "1853",
+
+    ano:
+        "1814–1815: publicação de importante tratado experimental de toxicologia.",
+
+    importancia:
+        "Seu trabalho ajudou a transformar a investigação de envenenamentos em uma área baseada em métodos químicos.",
+
+    estudos:
+        "Química, toxicologia, farmacologia, bioquímica, análise instrumental, química analítica e interpretação de resultados.",
+
+    tempo:
+        "Geralmente envolve 4 a 5 anos de graduação relacionada à química, farmácia ou área compatível, além de especialização.",
+
+    hoje:
+        "É utilizada para investigar intoxicações, mortes, exposição a substâncias e presença de determinados compostos.",
+
+    antigamente:
+        "Foi especialmente importante em casos de envenenamento, quando era muito difícil provar cientificamente que uma substância havia causado uma morte.",
+
+    referencia:
+        "Mathieu Orfila é uma das maiores referências históricas.",
+
+    curiosidade:
+        "A toxicologia forense foi impulsionada por casos famosos de envenenamento e pelo desenvolvimento de métodos químicos cada vez mais sensíveis."
+},
+
+
+/* =========================================================
+   4 - GENÉTICA FORENSE
+========================================================= */
+
+{
+    nome: "Genética Forense / DNA",
+    categoria: "biologica",
+
+    imagem: "imagem-pericia-genetica.jpg",
+
+    descricao:
+        "Utiliza características genéticas para auxiliar na identificação de pessoas e na análise de vestígios biológicos.",
+
+    faz:
+        "Pode analisar sangue, saliva, células, tecidos e outros materiais biológicos para obter perfis genéticos.",
+
+    pioneiro:
+        "A identificação por DNA foi desenvolvida a partir dos trabalhos de genética molecular de vários pesquisadores. Alec Jeffreys é uma das figuras centrais do desenvolvimento do DNA fingerprinting.",
+
+    nascimento:
+        "Alec Jeffreys nasceu em 1950.",
+
+    morte:
+        "Alec Jeffreys está vivo.",
+
+    ano:
+        "1984: desenvolvimento do conceito de DNA fingerprinting.",
+
+    importancia:
+        "O DNA revolucionou a identificação humana porque permitiu comparar perfis genéticos encontrados em vestígios com indivíduos ou bancos de referência.",
+
+    estudos:
+        "Biologia, genética, biologia molecular, bioquímica, estatística, genética de populações e técnicas laboratoriais.",
+
+    tempo:
+        "Normalmente 4 a 5 anos de graduação relacionada à biologia ou área compatível, além de especialização ou treinamento.",
+
+    hoje:
+        "É usada em identificação humana, investigação criminal, identificação de pessoas desaparecidas e testes de parentesco.",
+
+    antigamente:
+        "Antes da genética forense moderna, eram utilizadas características físicas, grupos sanguíneos, impressões digitais e outras técnicas de identificação.",
+
+    referencia:
+        "Alec Jeffreys é uma das principais referências no desenvolvimento do DNA fingerprinting.",
+
+    curiosidade:
+        "A genética forense permitiu tanto identificar suspeitos quanto excluir pessoas que não correspondem ao perfil genético analisado."
+},
+
+
+/* =========================================================
+   5 - PAPILOSCOPIA
+========================================================= */
+
+{
+    nome: "Papiloscopia / Impressões Digitais",
+    categoria: "documental",
+
+    imagem: "imagem-dna.jpg",
+
+    descricao:
+        "Estuda as impressões das cristas papilares, principalmente dos dedos, para identificação humana.",
+
+    faz:
+        "Coleta, revela, compara e interpreta impressões papilares encontradas em diferentes superfícies.",
+
+    pioneiro:
+        "Jan Evangelista Purkyně descreveu e classificou padrões de impressões digitais em 1823. Henry Faulds, Francis Galton, Juan Vucetich e Edward Henry também tiveram papéis fundamentais no desenvolvimento da identificação por impressões digitais.",
+
+    nascimento:
+        "Jan Evangelista Purkyně nasceu em 1787.",
+
+    morte:
+        "Morreu em 1869.",
+
+    ano:
+        "1823: importante marco na classificação científica das impressões digitais.",
+
+    importancia:
+        "As impressões digitais ajudaram a criar um método de identificação que poderia ser utilizado mesmo quando outras formas de reconhecimento eram difíceis.",
+
+    estudos:
+        "Papiloscopia, anatomia da pele, padrões papilares, identificação humana, fotografia, química de revelação e cadeia de custódia.",
+
+    tempo:
+        "Pode variar conforme o cargo. Além da formação exigida, é necessário treinamento técnico específico.",
+
+    hoje:
+        "Continua sendo utilizada para identificação humana e comparação de vestígios papilares.",
+
+    antigamente:
+        "No final do século XIX e início do século XX passou a substituir gradualmente sistemas antropométricos em diversas instituições.",
+
+    referencia:
+        "Juan Vucetich é uma das maiores referências históricas da identificação por impressões digitais.",
+
+    curiosidade:
+        "Em 1892, Vucetich utilizou uma impressão digital em uma investigação de homicídio envolvendo Francisca Rojas. A evidência ajudou a identificar a autora do crime."
+},
+
+
+/* =========================================================
+   6 - BALÍSTICA FORENSE
+========================================================= */
+
+{
+    nome: "Balística Forense",
+    categoria: "criminal",
+
+    imagem: "imagem-balistica.jpg",
+
+    descricao:
+        "Aplica conhecimentos de física e análise de armas e munições para investigar ocorrências envolvendo disparos.",
+
+    faz:
+        "Pode comparar marcas produzidas por armas e munições, analisar projéteis e estojos e estudar características relacionadas a disparos.",
+
+    pioneiro:
+        "Alexandre Lacassagne realizou trabalhos pioneiros envolvendo armas de fogo e investigação criminal no final do século XIX.",
+
+    nascimento:
+        "Alexandre Lacassagne nasceu em 1843.",
+
+    morte:
+        "Morreu em 1924.",
+
+    ano:
+        "Final do século XIX",
+
+    importancia:
+        "Permitiu utilizar características físicas produzidas durante o disparo como evidências em investigações.",
+
+    estudos:
+        "Física, mecânica, materiais, armas e munições, microscopia, química e métodos de comparação.",
+
+    tempo:
+        "Geralmente exige formação superior compatível com o cargo e treinamento especializado.",
+
+    hoje:
+        "Pode auxiliar investigações de disparos, acidentes e outros eventos envolvendo armas de fogo.",
+
+    antigamente:
+        "Os primeiros estudos buscavam relacionar características de projéteis e armas aos acontecimentos investigados.",
+
+    referencia:
+        "Alexandre Lacassagne é uma importante referência histórica.",
+
+    curiosidade:
+        "A balística forense combina conceitos de física, mecânica, materiais e análise microscópica."
+},
+
+
+/* =========================================================
+   7 - DOCUMENTOSCOPIA
+========================================================= */
+
+{
+    nome: "Documentoscopia",
+    categoria: "documental",
+
+    imagem: "imagem-laudo.jpg",
+
+    descricao:
+        "Examina documentos para verificar autenticidade, alterações, falsificações e características de produção.",
+
+    faz:
+        "Pode analisar escrita, assinaturas, impressão, papel, tinta, rasuras, alterações e elementos de segurança.",
+
+    pioneiro:
+        "A área foi desenvolvida por vários especialistas. Alphonse Bertillon e outros investigadores contribuíram para a identificação e análise documental no desenvolvimento da ciência forense.",
+
+    nascimento:
+        "Alphonse Bertillon nasceu em 1853.",
+
+    morte:
+        "Morreu em 1914.",
+
+    ano:
+        "Século XIX",
+
+    importancia:
+        "Documentos possuem grande importância jurídica e podem ser utilizados para provar identidade, contratos, transações e acontecimentos.",
+
+    estudos:
+        "Grafoscopia, análise documental, química, física, impressão, materiais e técnicas de segurança documental.",
+
+    tempo:
+        "A formação depende da carreira. Normalmente é necessária formação superior ou técnica compatível e treinamento especializado.",
+
+    hoje:
+        "Ajuda a investigar falsificações, adulterações e autenticidade documental.",
+
+    antigamente:
+        "Era utilizada para tentar verificar assinaturas, documentos e alterações antes da existência das ferramentas digitais modernas.",
+
+    referencia:
+        "Alphonse Bertillon é uma referência histórica na identificação policial.",
+
+    curiosidade:
+        "Bertillon também ficou conhecido pelo desenvolvimento de um sistema antropométrico de identificação e pelo uso sistemático de fotografias policiais."
+},
+
+
+/* =========================================================
+   8 - ANTROPOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Antropologia Forense",
+    categoria: "biologica",
+
+    imagem: "imagem-antropologia.jpg",
+
+    descricao:
+        "Aplica conhecimentos da antropologia biológica ao estudo de restos humanos para auxiliar na identificação.",
+
+    faz:
+        "Pode analisar ossos e restos humanos para estimar características biológicas e auxiliar na identificação.",
+
+    pioneiro:
+        "A área foi construída por diversos antropólogos e médicos. Thomas Dwight é frequentemente lembrado entre os pioneiros da antropologia física aplicada à identificação.",
+
+    nascimento:
+        "Thomas Dwight nasceu em 1843.",
+
+    morte:
+        "Morreu em 1911.",
+
+    ano:
+        "Século XIX",
+
+    importancia:
+        "É especialmente importante quando restos humanos estão esqueletizados, fragmentados ou em condições que dificultam métodos comuns de identificação.",
+
+    estudos:
+        "Antropologia biológica, anatomia, osteologia, arqueologia, estatística e identificação humana.",
+
+    tempo:
+        "Normalmente exige graduação e especialização ou pós-graduação em áreas relacionadas.",
+
+    hoje:
+        "É usada em identificação de restos humanos, desastres, desaparecimentos e investigações arqueológicas e judiciais.",
+
+    antigamente:
+        "Conhecimentos de anatomia e osteologia já eram utilizados para reconhecer características de indivíduos.",
+
+    referencia:
+        "Wilton Marion Krogman é uma importante referência histórica da antropologia forense.",
+
+    curiosidade:
+        "O esqueleto pode fornecer informações mesmo quando tecidos moles já desapareceram."
+},
+
+
+/* =========================================================
+   9 - ODONTOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Odontologia Forense",
+    categoria: "biologica",
+
+    imagem: "imagem-odontologia.jpg",
+
+    descricao:
+        "Utiliza conhecimentos odontológicos para identificação humana e análise de questões relacionadas à Justiça.",
+
+    faz:
+        "Pode comparar dentes, restaurações, características odontológicas e outros elementos da cavidade oral.",
+
+    pioneiro:
+        "Oscar Amoëdo é uma das figuras históricas importantes da odontologia legal.",
+
+    nascimento:
+        "Oscar Amoëdo nasceu em 1863.",
+
+    morte:
+        "Morreu em 1945.",
+
+    ano:
+        "Final do século XIX",
+
+    importancia:
+        "Os dentes podem resistir a condições que destroem outros tecidos, tornando-se úteis para identificação.",
+
+    estudos:
+        "Odontologia, anatomia, radiologia, odontologia legal e identificação humana.",
+
+    tempo:
+        "No Brasil, a formação em odontologia normalmente dura aproximadamente 5 anos, seguida de formação específica.",
+
+    hoje:
+        "É utilizada em identificação humana, desastres e determinadas análises de lesões e marcas.",
+
+    antigamente:
+        "Características dentárias já eram utilizadas para reconhecer indivíduos antes das modernas técnicas genéticas.",
+
+    referencia:
+        "Oscar Amoëdo é uma das referências históricas da área.",
+
+    curiosidade:
+        "Os registros odontológicos de uma pessoa podem ajudar a compará-la com restos humanos não identificados."
+},
+
+
+/* =========================================================
+   10 - ENTOMOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Entomologia Forense",
+    categoria: "biologica",
+
+    imagem: "imagem-entomologia.jpg",
+
+    descricao:
+        "Estuda insetos e outros artrópodes associados a situações de interesse legal.",
+
+    faz:
+        "Pode analisar espécies, ciclos de desenvolvimento e presença de insetos em determinados ambientes.",
+
+    pioneiro:
+        "Bergeret d'Arbois publicou em 1855 um dos primeiros casos conhecidos envolvendo entomologia aplicada a uma investigação.",
+
+    nascimento:
+        "Bergeret d'Arbois nasceu no século XIX.",
+
+    morte:
+        "Século XIX",
+
+    ano:
+        "1855: marco histórico frequentemente citado para a entomologia forense moderna.",
+
+    importancia:
+        "O desenvolvimento dos insetos pode fornecer informações úteis em determinadas investigações.",
+
+    estudos:
+        "Biologia, zoologia, entomologia, ecologia, anatomia de insetos e análise ambiental.",
+
+    tempo:
+        "Normalmente envolve graduação em biologia ou área relacionada e especialização.",
+
+    hoje:
+        "Pode auxiliar especialmente em investigações envolvendo restos humanos e análise de ambientes.",
+
+    antigamente:
+        "A utilização científica de insetos em investigações começou a ganhar força no século XIX.",
+
+    referencia:
+        "Bergeret d'Arbois é um dos nomes históricos associados aos primeiros casos documentados.",
+
+    curiosidade:
+        "Os insetos possuem ciclos de desenvolvimento que variam conforme espécie e condições ambientais."
+},
+
+
+/* =========================================================
+   11 - PSIQUIATRIA FORENSE
+========================================================= */
+
+{
+    nome: "Psiquiatria Forense",
+    categoria: "biologica",
+
+    imagem: "imagem-psiquiatria.jpg",
+
+    descricao:
+        "Aplica conhecimentos da psiquiatria a questões jurídicas.",
+
+    faz:
+        "Pode avaliar questões relacionadas à saúde mental, capacidade, responsabilidade e outros temas definidos pela legislação.",
+
+    pioneiro:
+        "A disciplina foi construída por diversos médicos e juristas ao longo dos séculos XIX e XX.",
+
+    nascimento:
+        "Não existe um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "Ajuda a Justiça a compreender questões psiquiátricas quando conhecimentos médicos especializados são necessários.",
+
+    estudos:
+        "Medicina, psiquiatria, psicopatologia, legislação e ética.",
+
+    tempo:
+        "Medicina geralmente exige cerca de 6 anos no Brasil, seguida de formação em psiquiatria e posteriormente conhecimentos forenses.",
+
+    hoje:
+        "Pode auxiliar processos judiciais que envolvam questões de saúde mental.",
+
+    antigamente:
+        "Conceitos médicos foram progressivamente incorporados às discussões sobre comportamento e responsabilidade.",
+
+    referencia:
+        "A área possui diversos pioneiros, não sendo historicamente correto atribuí-la a apenas uma pessoa.",
+
+    curiosidade:
+        "O trabalho pericial não significa simplesmente diagnosticar uma pessoa; a questão jurídica a ser respondida é fundamental."
+},
+
+
+/* =========================================================
+   12 - PSICOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Psicologia Forense",
+    categoria: "biologica",
+
+    imagem: "imagem-psicologia.jpg",
+
+    descricao:
+        "Aplica conhecimentos da psicologia a questões relacionadas ao sistema de Justiça.",
+
+    faz:
+        "Pode envolver avaliação psicológica, comportamento, entrevistas e questões específicas determinadas por processos judiciais.",
+
+    pioneiro:
+        "Hugo Münsterberg é frequentemente lembrado por defender a aplicação da psicologia ao sistema jurídico no início do século XX.",
+
+    nascimento:
+        "Hugo Münsterberg nasceu em 1863.",
+
+    morte:
+        "Morreu em 1916.",
+
+    ano:
+        "Início do século XX",
+
+    importancia:
+        "Contribuiu para aproximar métodos psicológicos de questões jurídicas.",
+
+    estudos:
+        "Psicologia, avaliação psicológica, psicometria, psicopatologia, ética e legislação.",
+
+    tempo:
+        "No Brasil, a graduação em psicologia normalmente dura aproximadamente 5 anos, seguida de formação específica.",
+
+    hoje:
+        "Pode auxiliar em avaliações determinadas judicialmente e em questões relacionadas ao comportamento humano.",
+
+    antigamente:
+        "Os primeiros pesquisadores buscavam descobrir como métodos psicológicos poderiam contribuir para decisões jurídicas.",
+
+    referencia:
+        "Hugo Münsterberg é uma referência histórica.",
+
+    curiosidade:
+        "A psicologia forense não deve ser confundida com a ideia popular de 'ler a mente' de suspeitos."
+},
+
+
+/* =========================================================
+   13 - COMPUTAÇÃO FORENSE
+========================================================= */
+
+{
+    nome: "Computação Forense / Perícia Digital",
+    categoria: "tecnologia",
+
+    imagem: "imagem-pericia-digital.jpg",
+
+    descricao:
+        "Examina dados digitais relacionados a investigações, respeitando procedimentos técnicos e jurídicos.",
+
+    faz:
+        "Pode analisar computadores, celulares, mídias digitais, arquivos, metadados e outros dados eletrônicos, conforme autorização e legislação aplicável.",
+
+    pioneiro:
+        "Não possui um único criador. A área surgiu com a expansão dos computadores e da necessidade de preservar e analisar evidências digitais.",
+
+    nascimento:
+        "Não se aplica.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Décadas de 1970–1990: desenvolvimento progressivo.",
+
+    importancia:
+        "A sociedade passou a produzir enorme quantidade de informações digitais, tornando a análise de dados eletrônicos importante para diversas investigações.",
+
+    estudos:
+        "Computação, sistemas operacionais, redes, bancos de dados, segurança da informação, programação, sistemas de arquivos e legislação.",
+
+    tempo:
+        "Normalmente 4 anos ou mais de graduação relacionada à tecnologia, mais especialização e treinamento contínuo.",
+
+    hoje:
+        "Pode auxiliar investigações que envolvam computadores, celulares e outros sistemas digitais.",
+
+    antigamente:
+        "Antes da popularização dos computadores, a maioria das evidências era física; a digitalização criou uma nova categoria de vestígios.",
+
+    referencia:
+        "A área possui muitos pesquisadores e profissionais pioneiros, não sendo correto atribuí-la a apenas uma pessoa.",
+
+    curiosidade:
+        "Um dos grandes desafios da perícia digital é preservar a integridade dos dados durante a análise."
+},
+
+
+/* =========================================================
+   14 - AUDIO E VÍDEO FORENSE
+========================================================= */
+
+{
+    nome: "Áudio, Vídeo e Imagem Forense",
+    categoria: "tecnologia",
+
+    imagem: "imagem-video-forense.jpg",
+
+    descricao:
+        "Analisa gravações de áudio, vídeo e imagens que possam ter relevância para uma investigação.",
+
+    faz:
+        "Pode examinar características técnicas de arquivos, qualidade, origem, alterações e outros aspectos relevantes.",
+
+    pioneiro:
+        "A área foi desenvolvida gradualmente com a evolução da fotografia, cinema, gravação sonora e posteriormente tecnologia digital.",
+
+    nascimento:
+        "Não existe um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XXI",
+
+    importancia:
+        "Câmeras e dispositivos de gravação passaram a registrar acontecimentos que podem posteriormente ser analisados.",
+
+    estudos:
+        "Fotografia, vídeo, áudio, engenharia, processamento digital de sinais, informática e análise de imagens.",
+
+    tempo:
+        "A formação depende da especialidade e normalmente envolve graduação relacionada e treinamento técnico.",
+
+    hoje:
+        "É especialmente relevante devido à enorme quantidade de câmeras, celulares e sistemas de gravação.",
+
+    antigamente:
+        "Fotografias e gravações analógicas já eram utilizadas como registros, mas apresentavam limitações tecnológicas.",
+
+    referencia:
+        "É uma área multidisciplinar, sem um único fundador.",
+
+    curiosidade:
+        "A existência de uma gravação não significa automaticamente que ela seja autêntica ou esteja livre de alterações; a análise técnica pode ser necessária."
+},
+
+
+/* =========================================================
+   15 - ANÁLISE DE MANCHAS DE SANGUE
+========================================================= */
+
+{
+    nome: "Análise de Padrões de Manchas de Sangue",
+    categoria: "biologica",
+
+    imagem: "imagem-vestigios.jpg",
+
+    descricao:
+        "Estuda padrões produzidos por sangue em determinadas situações para auxiliar na interpretação de uma cena.",
+
+    faz:
+        "Pode analisar forma, distribuição e características das manchas, sempre considerando as limitações científicas e o contexto.",
+
+    pioneiro:
+        "Eduard Piotrowski publicou em 1895 um estudo experimental sobre padrões de manchas de sangue. Herbert MacDonell tornou-se uma referência posterior no desenvolvimento moderno da área.",
+
+    nascimento:
+        "Eduard Piotrowski: século XIX.",
+
+    morte:
+        "Século XX.",
+
+    ano:
+        "1895: publicação de estudo experimental importante.",
+
+    importancia:
+        "A análise de manchas pode contribuir para a reconstrução de determinadas situações.",
+
+    estudos:
+        "Biologia, física, matemática, dinâmica de fluidos, documentação fotográfica e análise de cenas.",
+
+    tempo:
+        "Normalmente requer formação compatível e treinamento específico.",
+
+    hoje:
+        "Pode fazer parte da análise de determinadas cenas investigadas.",
+
+    antigamente:
+        "Os primeiros estudos tentaram relacionar padrões de sangue a diferentes mecanismos de produção.",
+
+    referencia:
+        "Eduard Piotrowski é uma referência histórica inicial.",
+
+    curiosidade:
+        "A interpretação de manchas de sangue exige cuidado porque muitos fatores podem influenciar sua aparência."
+},
+
+
+/* =========================================================
+   16 - FONÉTICA FORENSE
+========================================================= */
+
+{
+    nome: "Fonética Forense",
+    categoria: "tecnologia",
+
+    imagem: "imagem-audio.jpg",
+
+    descricao:
+        "Analisa características da fala e da voz em situações relacionadas à Justiça.",
+
+    faz:
+        "Pode comparar características acústicas da fala e auxiliar na análise de gravações.",
+
+    pioneiro:
+        "A área se desenvolveu principalmente com o avanço da linguística, acústica e tecnologia de gravação.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Século XX",
+
+    importancia:
+        "A voz pode ser encontrada em gravações telefônicas, vídeos e outros registros digitais.",
+
+    estudos:
+        "Linguística, fonética, acústica, processamento de sinais e tecnologia de áudio.",
+
+    tempo:
+        "Normalmente envolve graduação em linguística, fonoaudiologia, engenharia ou áreas relacionadas, além de especialização.",
+
+    hoje:
+        "Pode auxiliar na análise técnica de gravações de voz.",
+
+    antigamente:
+        "Antes das tecnologias digitais, gravações analógicas apresentavam maiores limitações de qualidade e armazenamento.",
+
+    referencia:
+        "É uma área multidisciplinar.",
+
+    curiosidade:
+        "A identificação de voz não deve ser tratada como uma simples comparação subjetiva; métodos técnicos e limitações precisam ser considerados."
+},
+
+
+/* =========================================================
+   17 - ENGENHARIA FORENSE
+========================================================= */
+
+{
+    nome: "Engenharia Forense",
+    categoria: "especializada",
+
+    imagem: "imagem-engenharia.jpg",
+
+    descricao:
+        "Aplica conhecimentos de engenharia para investigar falhas, acidentes, estruturas, máquinas e materiais.",
+
+    faz:
+        "Pode analisar acidentes, falhas estruturais, equipamentos, veículos, materiais e processos de engenharia.",
+
+    pioneiro:
+        "Não possui um único fundador. A área evoluiu junto com as próprias engenharias e a investigação técnica de acidentes.",
+
+    nascimento:
+        "Não se aplica.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "Acidentes e falhas técnicas exigem conhecimento especializado para determinar possíveis causas.",
+
+    estudos:
+        "Engenharia civil, mecânica, elétrica, materiais ou outras especialidades, além de análise de falhas e legislação.",
+
+    tempo:
+        "Normalmente 5 anos ou mais de graduação em engenharia, seguida de experiência ou especialização.",
+
+    hoje:
+        "Pode investigar acidentes, falhas de produtos, estruturas e sistemas.",
+
+    antigamente:
+        "O desenvolvimento industrial aumentou a necessidade de compreender cientificamente acidentes e falhas técnicas.",
+
+    referencia:
+        "Não existe um único 'melhor engenheiro forense' mundialmente reconhecido.",
+
+    curiosidade:
+        "A engenharia forense pode atuar em acidentes de veículos, pontes, máquinas, edifícios e diversos produtos."
+},
+
+
+/* =========================================================
+   18 - CONTABILIDADE FORENSE
+========================================================= */
+
+{
+    nome: "Contabilidade Forense",
+    categoria: "especializada",
+
+    imagem: "imagem-contabilidade.jpg",
+
+    descricao:
+        "Utiliza contabilidade, auditoria e análise financeira para investigar questões econômicas e patrimoniais.",
+
+    faz:
+        "Pode analisar movimentações financeiras, documentos contábeis, empresas, patrimônio e transações.",
+
+    pioneiro:
+        "A área se desenvolveu gradualmente com a evolução da contabilidade, auditoria e investigação financeira.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "Transações financeiras podem ser complexas e exigir especialistas para sua interpretação.",
+
+    estudos:
+        "Contabilidade, auditoria, finanças, matemática financeira, economia, legislação e análise de dados.",
+
+    tempo:
+        "Normalmente cerca de 4 anos de graduação em contabilidade ou área relacionada, além de especialização.",
+
+    hoje:
+        "Pode auxiliar na investigação de fraudes, desvios, irregularidades e disputas patrimoniais.",
+
+    antigamente:
+        "A expansão das empresas e sistemas financeiros aumentou a necessidade de auditorias e investigações contábeis.",
+
+    referencia:
+        "É uma área multidisciplinar.",
+
+    curiosidade:
+        "A contabilidade forense combina investigação com análise financeira."
+},
+
+
+/* =========================================================
+   19 - PERÍCIA AMBIENTAL
+========================================================= */
+
+{
+    nome: "Perícia Ambiental",
+    categoria: "especializada",
+
+    imagem: "imagem-pericia-ambiental.jpg",
+
+    descricao:
+        "Analisa possíveis impactos, danos ou alterações ambientais que tenham relevância administrativa ou judicial.",
+
+    faz:
+        "Pode analisar água, solo, vegetação, fauna, poluição, áreas degradadas e outros elementos ambientais.",
+
+    pioneiro:
+        "Não possui um fundador único. Surgiu com o crescimento das ciências ambientais e da legislação ambiental.",
+
+    nascimento:
+        "Não se aplica.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Século XX",
+
+    importancia:
+        "A industrialização e o crescimento populacional aumentaram a necessidade de estudar impactos ambientais.",
+
+    estudos:
+        "Biologia, engenharia ambiental, química, geologia, ecologia, geoprocessamento e legislação ambiental.",
+
+    tempo:
+        "Geralmente 4 a 5 anos de graduação, mais especialização conforme a área.",
+
+    hoje:
+        "Pode auxiliar na avaliação de danos ambientais e cumprimento de normas.",
+
+    antigamente:
+        "A preocupação científica com impactos ambientais cresceu especialmente durante o século XX.",
+
+    referencia:
+        "É uma área multidisciplinar.",
+
+    curiosidade:
+        "Uma perícia ambiental pode reunir informações de diversas áreas científicas ao mesmo tempo."
+},
+
+
+/* =========================================================
+   20 - GEOLOGIA FORENSE
+========================================================= */
+
+{
+    nome: "Geologia Forense",
+    categoria: "especializada",
+
+    imagem: "imagem-geologia.jpg",
+
+    descricao:
+        "Utiliza conhecimentos geológicos para analisar solos, minerais, sedimentos e outros materiais.",
+
+    faz:
+        "Pode comparar características de solos, minerais e sedimentos encontrados em diferentes locais.",
+
+    pioneiro:
+        "A utilização de solo como evidência foi desenvolvida por vários pesquisadores. Edmond Locard também destacou a importância de vestígios microscópicos transferidos entre ambientes.",
+
+    nascimento:
+        "Edmond Locard nasceu em 1877.",
+
+    morte:
+        "Morreu em 1966.",
+
+    ano:
+        "Início do século XX",
+
+    importancia:
+        "Pequenas partículas de solo e minerais podem ser transferidas entre pessoas, objetos e ambientes.",
+
+    estudos:
+        "Geologia, mineralogia, pedologia, química, microscopia e análise de materiais.",
+
+    tempo:
+        "Normalmente exige graduação em geologia ou área relacionada e especialização forense.",
+
+    hoje:
+        "Pode auxiliar na comparação de materiais geológicos encontrados em diferentes locais.",
+
+    antigamente:
+        "A análise de partículas e materiais começou a ganhar importância com a consolidação da criminalística.",
+
+    referencia:
+        "Edmond Locard é uma referência importante para compreender a lógica da transferência de vestígios.",
+
+    curiosidade:
+        "Uma pequena partícula pode ser potencialmente relevante quando analisada junto com outras evidências."
+},
+
+
+/* =========================================================
+   21 - ARTE FORENSE
+========================================================= */
+
+{
+    nome: "Arte Forense",
+    categoria: "especializada",
+
+    imagem: "imagem-arte-forense.jpg",
+
+    descricao:
+        "Utiliza técnicas artísticas e conhecimentos de identificação para auxiliar na representação de pessoas ou objetos de interesse investigativo.",
+
+    faz:
+        "Pode produzir retratos falados, reconstruções faciais e representações utilizadas em determinadas investigações.",
+
+    pioneiro:
+        "A área possui desenvolvimento histórico associado à identificação policial e à representação de pessoas.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "Antes das modernas tecnologias de reconhecimento, desenhos e retratos eram importantes para divulgar características de pessoas procuradas.",
+
+    estudos:
+        "Desenho, anatomia, observação, psicologia da percepção, fotografia e técnicas de representação.",
+
+    tempo:
+        "Varia bastante. O desenvolvimento profissional pode exigir anos de treinamento artístico e específico.",
+
+    hoje:
+        "Pode auxiliar na criação de representações investigativas e reconstruções.",
+
+    antigamente:
+        "Retratos desenhados eram uma das principais formas de representar visualmente pessoas procuradas.",
+
+    referencia:
+        "Não existe um único fundador mundial.",
+
+    curiosidade:
+        "O retrato falado não é uma fotografia; ele depende da memória e da descrição fornecida por testemunhas."
+},
+
+
+/* =========================================================
+   22 - PERÍCIA DE INCÊNDIOS
+========================================================= */
+
+{
+    nome: "Perícia de Incêndios",
+    categoria: "especializada",
+
+    imagem: "imagem-incendio.jpg",
+
+    descricao:
+        "Investiga tecnicamente incêndios e seus possíveis mecanismos de início e propagação.",
+
+    faz:
+        "Pode examinar estruturas, materiais, padrões de danos, instalações e outras evidências relacionadas ao incêndio.",
+
+    pioneiro:
+        "A área se desenvolveu com o avanço da engenharia, química, investigação de incêndios e segurança contra incêndio.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "A análise científica pode ajudar a diferenciar acidentes, falhas técnicas e outras possibilidades consideradas pela investigação.",
+
+    estudos:
+        "Engenharia, química, física, materiais, eletricidade e segurança contra incêndio.",
+
+    tempo:
+        "Normalmente exige formação superior compatível e treinamento específico.",
+
+    hoje:
+        "Pode auxiliar investigações de incêndios em casas, empresas, veículos e instalações.",
+
+    antigamente:
+        "As investigações eram muito mais dependentes de observações visuais e relatos.",
+
+    referencia:
+        "É uma área construída por várias especialidades.",
+
+    curiosidade:
+        "A análise de um incêndio precisa considerar que o próprio fogo pode destruir ou alterar evidências."
+},
+
+
+/* =========================================================
+   23 - FORENSE DE VEÍCULOS
+========================================================= */
+
+{
+    nome: "Perícia Automotiva / Acidentes de Trânsito",
+    categoria: "especializada",
+
+    imagem: "imagem-acidente.jpg",
+
+    descricao:
+        "Analisa veículos, marcas, danos e circunstâncias técnicas relacionadas a acidentes.",
+
+    faz:
+        "Pode analisar deformações, sistemas mecânicos, marcas, condições do veículo e elementos do local.",
+
+    pioneiro:
+        "Não existe um único fundador. A área cresceu com o desenvolvimento dos veículos e da engenharia.",
+
+    nascimento:
+        "Não se aplica.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Século XX",
+
+    importancia:
+        "O crescimento do número de veículos criou a necessidade de investigação técnica de acidentes.",
+
+    estudos:
+        "Engenharia mecânica, física, dinâmica, veículos, materiais e reconstrução de acidentes.",
+
+    tempo:
+        "Normalmente 5 anos de engenharia ou formação compatível, além de especialização.",
+
+    hoje:
+        "Pode auxiliar na investigação técnica de acidentes de trânsito.",
+
+    antigamente:
+        "Os primeiros automóveis exigiram novas formas de investigação de acidentes e falhas mecânicas.",
+
+    referencia:
+        "É uma área multidisciplinar.",
+
+    curiosidade:
+        "A análise de um acidente pode envolver física, engenharia, matemática e análise dos vestígios encontrados no local."
+},
+
+
+/* =========================================================
+   24 - FORENSE DE FIBRAS E MATERIAIS
+========================================================= */
+
+{
+    nome: "Análise de Fibras e Vestígios de Materiais",
+    categoria: "quimica",
+
+    imagem: "imagem-fibras.jpg",
+
+    descricao:
+        "Analisa pequenos materiais encontrados em locais, objetos ou pessoas.",
+
+    faz:
+        "Pode examinar fibras têxteis, fragmentos, partículas, tintas, vidros e outros materiais.",
+
+    pioneiro:
+        "A análise sistemática de vestígios materiais se desenvolveu com a consolidação da criminalística no final do século XIX e início do século XX.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Séculos XIX–XX",
+
+    importancia:
+        "Vestígios pequenos podem ajudar a estabelecer possíveis relações entre pessoas, objetos e locais.",
+
+    estudos:
+        "Química, física, ciência dos materiais, microscopia e análise instrumental.",
+
+    tempo:
+        "Normalmente envolve graduação relacionada e treinamento especializado.",
+
+    hoje:
+        "Pode ser utilizada em diferentes investigações que envolvam transferência de materiais.",
+
+    antigamente:
+        "A análise microscópica permitiu estudar vestígios que não podiam ser identificados apenas visualmente.",
+
+    referencia:
+        "Edmond Locard é uma referência importante pela ideia de transferência de vestígios.",
+
+    curiosidade:
+        "Fibras de roupas, tapetes e tecidos podem ser analisadas como parte de um conjunto de evidências."
+},
+
+
+/* =========================================================
+   25 - FONÉTICA / LINGUÍSTICA FORENSE
+========================================================= */
+
+{
+    nome: "Linguística Forense",
+    categoria: "documental",
+
+    imagem: "imagem-documentos.jpg",
+
+    descricao:
+        "Aplica conhecimentos da linguagem a questões relacionadas ao sistema de Justiça.",
+
+    faz:
+        "Pode analisar linguagem escrita, autoria, significado, ambiguidades, discursos e outros aspectos linguísticos.",
+
+    pioneiro:
+        "A linguística forense moderna se consolidou especialmente no século XX.",
+
+    nascimento:
+        "Não possui um único fundador.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Século XX",
+
+    importancia:
+        "Textos e falas podem possuir informações relevantes para processos e investigações.",
+
+    estudos:
+        "Linguística, semântica, sintaxe, pragmática, análise textual e legislação.",
+
+    tempo:
+        "Normalmente graduação em linguística, letras ou área relacionada e especialização.",
+
+    hoje:
+        "Pode auxiliar na análise técnica de textos e linguagem em contextos jurídicos.",
+
+    antigamente:
+        "A interpretação de textos jurídicos e documentos sempre foi importante, mas os métodos linguísticos modernos são mais recentes.",
+
+    referencia:
+        "Jan Svartvik é frequentemente associado à consolidação do termo 'linguística forense'.",
+
+    curiosidade:
+        "A linguagem pode ser analisada não apenas pelo que diz, mas também por estrutura, contexto e características linguísticas."
+},
+
+
+/* =========================================================
+   26 - FORENSE DE VIDA SELVAGEM
+========================================================= */
+
+{
+    nome: "Ciência Forense da Vida Selvagem",
+    categoria: "especializada",
+
+    imagem: "imagem-fauna.jpg",
+
+    descricao:
+        "Utiliza ciência para investigar crimes e questões envolvendo animais, espécies e produtos da fauna.",
+
+    faz:
+        "Pode trabalhar com identificação de espécies, material biológico e análise de origem de determinados vestígios.",
+
+    pioneiro:
+        "É uma área relativamente recente e multidisciplinar.",
+
+    nascimento:
+        "Não se aplica.",
+
+    morte:
+        "Não se aplica.",
+
+    ano:
+        "Final do século XX / século XXI",
+
+    importancia:
+        "O combate ao tráfico de animais e produtos da fauna exige métodos científicos de identificação.",
+
+    estudos:
+        "Biologia, zoologia, genética, ecologia, anatomia e legislação ambiental.",
+
+    tempo:
+        "Geralmente exige graduação em biologia ou área relacionada e especialização.",
+
+    hoje:
+        "Pode auxiliar investigações ambientais e identificação de espécies.",
+
+    antigamente:
+        "A identificação era muito mais dependente da observação morfológica e do conhecimento de especialistas.",
+
+    referencia:
+        "É uma área multidisciplinar relativamente recente.",
+
+    curiosidade:
+        "Técnicas genéticas podem ajudar a identificar espécies mesmo quando o material encontrado está fragmentado."
+}
+
+];
+
+
+
+/* =========================================================
+   RENDERIZAÇÃO
+========================================================= */
+
+const lista = document.getElementById("listaPericias");
+const pesquisa = document.getElementById("pesquisa");
+const filtro = document.getElementById("filtroCategoria");
+const contador = document.getElementById("contador");
+
+
+function renderizar() {
+
+    const texto = pesquisa.value.toLowerCase();
+    const categoriaSelecionada = filtro.value;
+
+    const resultados = pericias.filter(pericia => {
+
+        const correspondeTexto =
+            pericia.nome.toLowerCase().includes(texto) ||
+            pericia.descricao.toLowerCase().includes(texto) ||
+            pericia.faz.toLowerCase().includes(texto) ||
+            pericia.pioneiro.toLowerCase().includes(texto);
+
+        const correspondeCategoria =
+            categoriaSelecionada === "todas" ||
+            pericia.categoria === categoriaSelecionada;
+
+        return correspondeTexto && correspondeCategoria;
+
+    });
+
+
+    contador.innerHTML =
+        `🔎 ${resultados.length} área(s) encontrada(s) de ${pericias.length} cadastrada(s).`;
+
+
+    if (resultados.length === 0) {
+
+        lista.innerHTML = `
+            <div class="sem-resultados">
+
+                <h2>Nenhuma perícia encontrada.</h2>
 
                 <p>
-                    A perícia criminal é uma área responsável por analisar vestígios encontrados
-                    em locais relacionados a crimes ou outros acontecimentos que precisam ser
-                    investigados.
+                    Tente pesquisar outro nome ou escolher outra categoria.
                 </p>
 
-                <p>
-                    O perito criminal utiliza conhecimentos científicos e técnicas específicas
-                    para examinar evidências e ajudar na compreensão dos fatos.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
             </div>
+        `;
+
+        return;
+    }
+
+
+    lista.innerHTML = resultados.map((pericia, indice) => `
+
+        <article class="pericia">
+
+            <img
+                src="${pericia.imagem}"
+                alt="Imagem relacionada à ${pericia.nome}"
+                onerror="this.style.display='none'"
+            >
+
+            <div class="conteudo">
+
+                <span class="categoria">
+                    ${nomeCategoria(pericia.categoria)}
+                </span>
+
+                <h2>
+                    ${pericia.nome}
+                </h2>
+
+                <p class="autor">
+                    Enciclopédia Mundial da Perícia
+                </p>
+
+
+                <p>
+                    <strong>O que é?</strong>
+                </p>
+
+                <p>
+                    ${pericia.descricao}
+                </p>
+
+
+                <div class="info">
+
+                    <p>
+                        <strong>👨‍🔬 O que o perito faz?</strong>
+                    </p>
+
+                    <p>
+                        ${pericia.faz}
+                    </p>
+
+                </div>
+
+
+                <h3>📜 História da perícia</h3>
+
+                <div class="historico">
+
+                    <p>
+                        <strong>Principal referência histórica:</strong>
+                        ${pericia.pioneiro}
+                    </p>
+
+                    <p>
+                        <strong>Marco histórico:</strong>
+                        ${pericia.ano}
+                    </p>
+
+                    <p>
+                        <strong>Nascimento:</strong>
+                        ${pericia.nascimento}
+                    </p>
+
+                    <p>
+                        <strong>Morte:</strong>
+                        ${pericia.morte}
+                    </p>
+
+                </div>
+
+
+                <h3>⭐ Por que essa pessoa ou referência é importante?</h3>
+
+                <p>
+                    ${pericia.importancia}
+                </p>
+
+
+                <h3>🎓 O que é necessário estudar?</h3>
+
+                <p>
+                    ${pericia.estudos}
+                </p>
+
+
+                <h3>⏳ Quanto tempo é necessário estudar?</h3>
+
+                <p>
+                    ${pericia.tempo}
+                </p>
+
+
+                <h3>🏛️ Como era utilizada antigamente?</h3>
+
+                <p>
+                    ${pericia.antigamente}
+                </p>
+
+
+                <h3>🌎 Como a perícia ajuda atualmente?</h3>
+
+                <p>
+                    ${pericia.hoje}
+                </p>
+
+
+                <h3>🏆 Grandes referências</h3>
+
+                <p>
+                    ${pericia.referencia}
+                </p>
+
+
+                <div class="curiosidade">
+
+                    <strong>💡 Curiosidade:</strong>
+
+                    <p>
+                        ${pericia.curiosidade}
+                    </p>
+
+                </div>
+
+
+                <div class="botoes">
+
+                    <button
+                        onclick="curtir(this)"
+                        title="Curtir"
+                    >
+                        ❤️ <span>0</span>
+                    </button>
+
+
+                    <button
+                        onclick="curtir(this)"
+                        title="Gostei"
+                    >
+                        👍 <span>0</span>
+                    </button>
+
+                </div>
+
+            </div>
+
         </article>
 
+    `).join("");
 
-        <article>
-            <img src="imagem-local-crime.jpg"
-                alt="Perito examinando cuidadosamente um local de crime.">
+}
 
-            <div>
-                <h2>O trabalho do perito criminal</h2>
 
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
+function nomeCategoria(categoria) {
 
-                <p>
-                    O perito criminal pode trabalhar em locais de crime, realizando observações,
-                    identificando vestígios e fazendo registros importantes para a investigação.
-                </p>
+    const categorias = {
 
-                <p>
-                    Entre os vestígios analisados podem estar impressões digitais, manchas,
-                    cabelos, fibras, objetos, documentos e outros materiais encontrados no local.
-                </p>
+        criminal: "Ciências criminais",
 
-                <p>
-                    Depois das análises, o profissional registra suas conclusões em um
-                    laudo pericial.
-                </p>
+        biologica: "Biológicas e médicas",
 
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
+        quimica: "Química e materiais",
 
+        tecnologia: "Tecnologia",
 
-        <article>
-            <img src="imagem-vestigios.jpg"
-                alt="Instrumentos utilizados para análise de vestígios em uma investigação criminal.">
+        documental: "Documentos e identificação",
 
-            <div>
-                <h2>A importância dos vestígios</h2>
+        especializada: "Outras áreas"
 
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
+    };
 
-                <p>
-                    Os vestígios são fundamentais para uma investigação. Um pequeno detalhe
-                    encontrado em um local pode ajudar a esclarecer o que aconteceu.
-                </p>
+    return categorias[categoria] || "Perícia";
 
-                <p>
-                    O trabalho do perito exige atenção, responsabilidade e cuidado para que
-                    os vestígios sejam preservados e analisados corretamente.
-                </p>
+}
 
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
 
+function curtir(botao) {
 
-        <!-- PERÍCIA QUÍMICA -->
+    const contador = botao.querySelector("span");
 
-        <article>
-            <img src="imagem-pericia-quimica.jpg"
-                alt="Perito químico realizando análise de uma amostra em laboratório.">
+    contador.textContent =
+        Number(contador.textContent) + 1;
 
-            <div>
-                <h2>Perícia Química</h2>
+}
 
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
 
-                <p>
-                    A perícia química utiliza conhecimentos da química para identificar e analisar
-                    diferentes substâncias e materiais relacionados a uma investigação.
-                </p>
+function alternarTema() {
 
-                <p>
-                    Esse tipo de perícia pode ser realizado em laboratórios e também pode auxiliar
-                    na investigação de substâncias encontradas em diferentes situações.
-                </p>
+    document.body.classList.toggle("escuro");
 
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
+}
 
 
-        <article>
-            <img src="imagem-laboratorio.jpg"
-                alt="Laboratório utilizado para análises químicas periciais.">
+/* Pesquisa automática */
 
-            <div>
-                <h2>Como funciona a perícia química?</h2>
+pesquisa.addEventListener(
+    "input",
+    renderizar
+);
 
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
 
-                <p>
-                    Na perícia química, amostras são examinadas utilizando métodos científicos
-                    adequados para identificar suas características e composição.
-                </p>
+filtro.addEventListener(
+    "change",
+    renderizar
+);
 
-                <p>
-                    O profissional precisa seguir procedimentos rigorosos para evitar alterações
-                    ou contaminações das amostras.
-                </p>
 
-                <p>
-                    Os resultados obtidos podem contribuir para a investigação e fazer parte
-                    de um laudo pericial.
-                </p>
+/* Inicialização */
 
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
+renderizar();
 
-
-        <article>
-            <img src="imagem-substancias.jpg"
-                alt="Amostras sendo analisadas durante uma perícia química.">
-
-            <div>
-                <h2>Análise de substâncias</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    A análise de substâncias é uma das atividades que pode fazer parte da
-                    perícia química. O objetivo é identificar materiais e obter informações
-                    que possam ajudar a esclarecer uma investigação.
-                </p>
-
-                <p>
-                    A análise científica permite que o perito apresente resultados baseados
-                    em métodos e evidências, e não apenas em observações.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <!-- PERÍCIA GENÉTICA -->
-
-        <article>
-            <img src="imagem-pericia-genetica.jpg"
-                alt="Análise de DNA realizada em um laboratório de genética forense.">
-
-            <div>
-                <h2>Perícia Genética</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    A perícia genética utiliza informações presentes no DNA para auxiliar na
-                    identificação de pessoas e na análise de materiais biológicos relacionados
-                    a uma investigação.
-                </p>
-
-                <p>
-                    O DNA pode ser encontrado em diferentes tipos de materiais biológicos,
-                    como sangue, saliva, pelos e outros vestígios.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <article>
-            <img src="imagem-dna.jpg"
-                alt="Representação de uma molécula de DNA utilizada em análises genéticas.">
-
-            <div>
-                <h2>O DNA na investigação</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    O DNA possui características que podem ajudar na identificação de uma pessoa.
-                    Por isso, vestígios biológicos podem ter grande importância em determinadas
-                    investigações.
-                </p>
-
-                <p>
-                    Em um laboratório, os profissionais realizam procedimentos para obter e
-                    analisar o material genético presente na amostra.
-                </p>
-
-                <p>
-                    Os resultados precisam ser interpretados cuidadosamente e registrados
-                    de maneira adequada.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <article>
-            <img src="imagem-dna-laboratorio.jpg"
-                alt="Pesquisador trabalhando com amostras de DNA em laboratório.">
-
-            <div>
-                <h2>Como é feita a análise genética?</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    A análise genética começa com a coleta adequada de uma amostra biológica.
-                    Depois, o material passa por procedimentos laboratoriais para que o DNA
-                    possa ser estudado.
-                </p>
-
-                <p>
-                    A qualidade da amostra e os cuidados durante todo o processo são muito
-                    importantes para que os resultados sejam confiáveis.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <!-- PERÍCIA JUDICIAL -->
-
-        <article>
-            <img src="imagem-pericia-judicial.jpg"
-                alt="Perito analisando documentos para uma investigação judicial.">
-
-            <div>
-                <h2>Perícia Judicial</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    A perícia judicial é realizada quando conhecimentos técnicos ou científicos
-                    são necessários para ajudar a esclarecer questões discutidas em um processo.
-                </p>
-
-                <p>
-                    O perito judicial atua como um profissional especializado e apresenta
-                    informações técnicas que podem auxiliar o juiz na compreensão de determinados
-                    assuntos.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <article>
-            <img src="imagem-laudo.jpg"
-                alt="Perito judicial analisando documentos e preparando um laudo.">
-
-            <div>
-                <h2>O que é um laudo pericial?</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    O laudo pericial é um documento elaborado pelo perito com os resultados
-                    de sua análise técnica.
-                </p>
-
-                <p>
-                    Nele podem ser apresentados os métodos utilizados, as informações encontradas,
-                    as análises realizadas e as conclusões do profissional.
-                </p>
-
-                <p>
-                    O documento deve apresentar as informações de maneira clara e fundamentada.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <article>
-            <img src="imagem-perito-judicial.jpg"
-                alt="Profissional realizando uma análise pericial para um processo judicial.">
-
-            <div>
-                <h2>O papel do perito judicial</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    O perito judicial precisa possuir conhecimento técnico ou científico
-                    relacionado ao assunto que será analisado.
-                </p>
-
-                <p>
-                    Seu trabalho deve ser realizado de forma imparcial e cuidadosa, apresentando
-                    ao processo informações técnicas que possam ajudar na compreensão da questão
-                    analisada.
-                </p>
-
-                <p>
-                    A perícia pode ser importante em diferentes tipos de processos, dependendo
-                    do assunto que está sendo discutido.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <!-- CONCLUSÃO -->
-
-        <article>
-            <img src="imagem-investigacao.jpg"
-                alt="Equipe de profissionais trabalhando em uma investigação pericial.">
-
-            <div>
-                <h2>A importância da perícia</h2>
-
-                <p class="artigo-autor">Por: Gisele Fidelis</p>
-
-                <p>
-                    Como vimos, existem diferentes áreas da perícia, e cada uma possui
-                    características e objetivos próprios.
-                </p>
-
-                <p>
-                    A perícia criminal trabalha principalmente com vestígios relacionados
-                    a investigações. A perícia química utiliza conhecimentos da química para
-                    analisar substâncias. A perícia genética trabalha com materiais biológicos
-                    e DNA. Já a perícia judicial auxilia processos que precisam de conhecimento
-                    técnico ou científico.
-                </p>
-
-                <p>
-                    Apesar das diferenças, todas essas áreas possuem algo em comum:
-                    a utilização de conhecimento especializado para produzir informações
-                    que possam ajudar no esclarecimento dos fatos.
-                </p>
-
-                <button>❤️ <span>0</span></button>
-                <button>👍 <span>0</span></button>
-            </div>
-        </article>
-
-
-        <button class="btn-tema-escuro">🌓</button>
-
-    </main>
-
-
-    <footer>
-        <p>Por Gisele Fidelis</p>
-    </footer>
-
-
-    <script src="script.js"></script>
+</script>
 
 </body>
 
